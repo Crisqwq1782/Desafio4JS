@@ -56,20 +56,13 @@ function crearTarjeta(p) {
 
 //ejecución al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
-    // Obtenemos el nombre del archivo actual desde la URL
     const path = window.location.pathname;
+    const isIndex = path.endsWith('/') || path.includes('index.html');
 
-    // 1. Si estamos en el index
-    if (path.includes('index.html') || path === '/' || path === '/index.html') {
-        renderizar('venta-container', 'venta', true);
-        renderizar('alquiler-container', 'alquiler', true);
+    if (document.getElementById('venta-container')) {
+        renderizar('venta-container', 'venta', isIndex);
     }
-    // 2. Si estamos en la página de ventas
-    else if (path.includes('propiedades_venta.html')) {
-        renderizar('venta-container', 'venta', false); // 'false' porque queremos TODAS
-    }
-    // 3. Si estamos en la página de alquiler
-    else if (path.includes('propiedades_alquiler.html')) {
-        renderizar('alquiler-container', 'alquiler', false); // 'false' porque queremos TODAS
+    if (document.getElementById('alquiler-container')) {
+        renderizar('alquiler-container', 'alquiler', isIndex);
     }
 });
